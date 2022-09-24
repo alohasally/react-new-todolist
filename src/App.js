@@ -2,16 +2,12 @@ import { useState } from 'react';
 import './App.css';
 import React from 'react';
 import List from './List';
-
+import Form from './Form'
 
 
 function App() {
   const [todoData, setTodoData] = useState([]);
   const [value, setValue] =useState();
-
-  const handleChange = (e) => {
-    setValue(e.target.value);
-  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -30,31 +26,18 @@ function App() {
 
 
   return (
-    <div className='Container'>
-        <div className='`todoBlock`'>
-            <div className='title'>
-              <h1>To Do List</h1>
+    <div className='flex items-center justify-center w-screen h-screen bg-purple-200 '>
+        <div className='w-full p-6 m-4 bg-white rounded shadow lg:w-3/4 lg:max-w-lg md:max-w-md' >
+            <div className='flex justify-between mb-3'>
+        
+              <h1 className='text-2xl font-bold text-gray-600'>To Do List</h1>
             </div>
           
           <List todoData={todoData} setTodoData={setTodoData}/>
 
-            <form style={{display: 'flex'}} onSubmit={handleSubmit}>
-              <input
-                type='text'
-                name='value'
-                style={{flex:'10', padding:'5px'}}
-                placeholder='
-                Write your what to do'
-                value={value}
-                onChange={handleChange}
+          <Form value = {value} setValue={setValue} handleSubmit={handleSubmit} 
               />
-              <input 
-                type='submit'
-                value='입력'
-                className='btn'
-                style={{flex: '1'}}
-              />
-            </form>
+          
         </div>
     </div>
   );
