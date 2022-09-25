@@ -4,13 +4,17 @@ import React from 'react';
 import Lists from './components/Lists';
 import Form from './components/Form'
 
+const initialTodoData = localStorage.getItem("todoData") ? JSON.parse(localStorage.getItem("todoData")) : [];
 
 function App() {
-  const [todoData, setTodoData] = useState([]);
+  const [todoData, setTodoData] = useState([initialTodoData]);
   const [value, setValue] =useState();
 
   const handleClick = useCallback((id) => {
-    let newTodoData = todoData.filter((data) => data.id !== setTodoData(newTodoData))}, [todoData]);
+    let newTodoData = todoData.filter((data) => data.id !== id);
+    setTodoData(newTodoData)
+    localStorage.setItem('todoData', JSON.stringify(newTodoData));
+  }, [todoData]);
 
 
   const handleSubmit = (e) => {
@@ -25,11 +29,13 @@ function App() {
 
     //원래 있던 할 일에 새로운 할 일 더해주기
     setTodoData((prev) => [...prev, newTodo]);
+    localStorage.setItem('todoData', JSON.stringify([...todoData, newTodo]));
     setValue('');
   };
 
   const handleRemoveClick = () => {
     setTodoData([]);
+    localStorage.setItem('todoData', JSON.stringify([]));
   }
 
   return (
