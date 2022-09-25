@@ -1,13 +1,17 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import './App.css';
 import React from 'react';
-import List from './List';
-import Form from './Form'
+import Lists from './components/Lists';
+import Form from './components/Form'
 
 
 function App() {
   const [todoData, setTodoData] = useState([]);
   const [value, setValue] =useState();
+
+  const handleClick = useCallback((id) => {
+    let newTodoData = todoData.filter((data) => data.id !== setTodoData(newTodoData))}, [todoData]);
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -24,16 +28,19 @@ function App() {
     setValue('');
   };
 
+  const handleRemoveClick = () => {
+    setTodoData([]);
+  }
 
   return (
     <div className='flex items-center justify-center w-screen h-screen bg-purple-200 '>
         <div className='w-full p-6 m-4 bg-white rounded shadow lg:w-3/4 lg:max-w-lg md:max-w-md' >
             <div className='flex justify-between mb-3'>
-        
               <h1 className='text-2xl font-bold text-gray-600'>To Do List</h1>
+              <button onClick={handleRemoveClick}>Delete All</button>
             </div>
           
-          <List todoData={todoData} setTodoData={setTodoData}/>
+          <Lists handleClick={handleClick} todoData={todoData} setTodoData={setTodoData}/>
 
           <Form value = {value} setValue={setValue} handleSubmit={handleSubmit} 
               />
