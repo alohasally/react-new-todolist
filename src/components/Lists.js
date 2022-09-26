@@ -22,7 +22,7 @@ const Lists = React.memo(({todoData, setTodoData, handleClick}) => {
         setTodoData(newTodoData);
         localStorage.setItem('todoData', JSON.stringify(newTodoData));
     };
-      }
+      
   
       return (
         <div>

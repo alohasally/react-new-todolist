@@ -36,9 +36,9 @@ const List = React.memo(({
     localStorage.setItem('todoData', JSON.stringify(newTodoData));
     };
     setIsEditing(false);
-  }
+  
 
-  if(isEditing) {
+  if (isEditing) {
     return (
       <div className={`bg-gray-100 flex items-center justify-between w-full px-4 py-1 my-2 text-gray-800 border rounded`}
           >
